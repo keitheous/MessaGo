@@ -3,18 +3,17 @@ $(document).ready(function(){
 
   // form submission
   function grabValues(){
-    var name = document.querySelector('#name').value;
-    var contact = document.querySelector('#contact').value;
-    var message = document.querySelector('#message').value;
-
-    var friend = document.getElementById('friend').checked;
-    var family =  document.getElementById('family').checked;
-    var stranger =  document.getElementById('stranger').checked;
-    var nobody =  document.getElementById('nobody').checked;
-    console.log('done');
-    console.log(name);
-    console.log(contact);
-    console.log(message);
+    console.log('grabbing values, building messageObject');
+    var messageObject = {
+      'name':     document.querySelector('#name').value,
+      'contact':  document.querySelector('#contact').value,
+      'message':  document.querySelector('#message').value,
+      'friend':   document.getElementById('friend').checked,
+      'family':   document.getElementById('family').checked,
+      'stranger': document.getElementById('stranger').checked,
+      'nobody':   document.getElementById('nobody').checked
+    }
+    console.log(messageObject);
   }
 
   var submitButton = document.getElementById("submission");
