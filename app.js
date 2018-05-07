@@ -1,8 +1,33 @@
 $(document).ready(function(){
   $('ul.tabs').tabs({ swipeable : true, responsiveThreshold : 1920 });
 
+  // storedMessages
+  var storedMessages = [
+    {
+      contact: "eee",
+      family: true,
+      friend: false,
+      message: "1111",
+      name: "qweqwe",
+      nobody: false,
+      stranger: false
+    },
+    {
+      contact: "1111",
+      family: true,
+      friend: true,
+      message: "22222",
+      name: "qweqwqweqwee",
+      nobody: true,
+      stranger: true
+    }
+  ]
+
+  console.log(storedMessages.length);
+
+
   // form submission
-  function grabValues(){
+  function grabValuesBuildMessage(){
     console.log('grabbing values, building messageObject');
     var messageObject = {
       'name':     document.querySelector('#name').value,
@@ -13,11 +38,12 @@ $(document).ready(function(){
       'stranger': document.getElementById('stranger').checked,
       'nobody':   document.getElementById('nobody').checked
     }
-    console.log(messageObject);
+    storedMessages.push(messageObject);
+    console.log(storedMessages);
   }
 
   var submitButton = document.getElementById("submission");
   submitButton.addEventListener("click", function(){
-    grabValues();
+    grabValuesBuildMessage();
   });
 });
