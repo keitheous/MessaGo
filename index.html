@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
    <!-- Compiled and minified JavaScript -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+   <script type="text/javascript" src ='app.js'></script>
+   <script type="text/javascript" src ='dataFetcher.js'></script>
+   <script type="text/javascript" src ='formSubmitter.js'></script>
 </head>
 <body>
   <div class="container">
@@ -27,11 +30,11 @@
         </ul>
       </div>
 
-      <div id="swipe-1" class="col s12" style="overflow: auto; height: 500px;">
+      <div id="swipe-1" class="col s12" style="overflow: auto; height: 500px; padding-bottom: 70px;">
         <div class="container">
 
           <h3>Form Section</h3>
-
+          <br>
           <div class="row">
             <div class="input-field col s6">
               <input type="text" id="name">
@@ -90,30 +93,17 @@
              <label for="textarea1">Message</label>
            </div>
           </div> <!-- end of third form row -->
-
-
           <span class="btn waves-effect waves-light right" id='submission'>Submit</span>
         </div> <!-- end of container -->
       </div> <!-- end of form section -->
 
 
-      <div id="swipe-2" class="col s12 #e3f2fd blue lighten-5" style="overflow: scroll; padding-bottom: 80px;">
+      <div id="swipe-2" class="col s12 #e3f2fd blue lighten-5" style="overflow: scroll; padding-bottom: 70px;">
         <div class="container" >
           <h3>Inbox Section</h3>
 
             <div id="inbox">
-
-              <div class="card horizontal">
-                <div class="card-content">
-                  <p>I am a very simple card. I am good at containing small bits of informawqweqweqweqwewewwwwtion.</p>
-                  <br>
-                  <span class='sender'>Keith</span>
-                </div>
-              </div>
-
-              <!-- this is where ill be appending more messages -->
-
-
+              <!-- this is where we append messages -->
             </div>
         </div>
       </div>
@@ -121,8 +111,5 @@
 
 
   </div>
-  <script src = 'app.js'></script>
-  <script src = 'dataFetcher.js'></script>
-  <script src = 'formSubmitter.js'></script>
 </body>
 </html>

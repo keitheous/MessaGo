@@ -1,5 +1,16 @@
 $(document).ready(function(){
-  $('ul.tabs').tabs({ swipeable : true, responsiveThreshold : 1920 });
+
+  // TODO :: refactor this to export function from app.js
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBdrbaclbvhHAu_4isVuO81Xr03JIoL5Vw",
+    authDomain: "nothertest-90f29.firebaseapp.com",
+    databaseURL: "https://nothertest-90f29.firebaseio.com",
+    projectId: "nothertest-90f29",
+    storageBucket: "nothertest-90f29.appspot.com",
+    messagingSenderId: "495235487976"
+  };
+  firebase.initializeApp(config);
 
   // form submission
   function grabValuesBuildMessage(){
