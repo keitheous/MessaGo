@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Messa-go!</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+   <!-- Compiled and minified JavaScript -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card-content">
+        <h1 class='center'>Messa-Go!</h1>
+        <p class="center flow-text">Your messages ready to go..</p>
+      </div>
+      <div class="card-tabs">
+        <ul class="tabs tabs-fixed-width">
+          <li class="tab col s3"><a class="active" href="#swipe-1">Form</a></li>
+          <li class="tab col s3"><a href="#swipe-2">Messages</a></li>
+        </ul>
+      </div>
+
+      <div id="swipe-1" class="col s12" style="overflow: auto; height: 450px;">
+        <div class="container">
+
+          <h3>Form Section</h3>
+
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="text" id="name">
+              <label>Name</label>
+            </div>
+
+            <div class="input-field col s6">
+              <input type="text" id="contact">
+              <label>Contact</label>
+            </div>
+
+          </div> <!-- end of first form row -->
+
+          <div class="row">
+            <div class="col s3">
+            <p>
+              <label>
+                <input type="checkbox" class="filled-in" id="friend"/>
+                <span>Friend</span>
+              </label>
+            </p>
+            </div>
+
+            <div class="col s3">
+            <p>
+              <label>
+                <input type="checkbox" class="filled-in" id="family"/>
+                <span>Family</span>
+              </label>
+            </p>
+            </div>
+
+            <div class="col s3">
+            <p>
+              <label>
+                <input type="checkbox" class="filled-in" id='stranger'/>
+                <span>Stranger</span>
+              </label>
+            </p>
+            </div>
+
+            <div class="col s3">
+            <p>
+              <label>
+                <input type="checkbox" class="filled-in" id="nobody"/>
+                <span>No body</span>
+              </label>
+            </p>
+            </div>
+          </div> <!-- end of second form row -->
+
+
+          <div class="row">
+            <div class="input-field col s12">
+             <textarea id="message" class="materialize-textarea"></textarea>
+             <label for="textarea1">Message</label>
+           </div>
+          </div> <!-- end of third form row -->
+
+
+          <span class="btn waves-effect waves-light right" id='submission'>Submit</span>
+        </div> <!-- end of container -->
+      </div> <!-- end of form section -->
+
+
+      <div id="swipe-2" class="col s12 #e3f2fd blue lighten-5">
+        <h3>Messages Section</h3>
+        <p>Test Messages Section</p>
+      </div>
+
+
+
+  </div>
+  <script src = 'app.js'></script>
+</body>
+</html>
