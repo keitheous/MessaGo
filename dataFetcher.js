@@ -25,7 +25,7 @@ $(document).ready(function(){
   // create card object to appended
   function cardSection(messageId, messageObject){
     inboxSection.innerHTML += [
-      "<div class='card horizontal' id="+messageId +">",
+      "<div class='card horizontal col s12' id="+ messageId +">",
         "<div class='card-content'>",
           "<p>" + messageObject['message'] +"</p>",
           "<br>",
@@ -50,13 +50,17 @@ $(document).ready(function(){
   // detect and sync granular change from message list in firebase - show
   db.ref().child('messages').on('child_added', snap => {
     cardSection(snap.key,snap.val())
-      firebase.database().ref('messages')
   });
 
+  db.ref().child('messages').on('child_changed', snap => {
+    cardSection(snap.key,snap.val())
+  });
 
+  // deletion of messages
   function removeMessage(id){
     console.log('removing card with id' + id);
-    db.ref('messages/' + id).remove()
+    db.ref('messages/' + id).remove();
+    document.getElementById(id).remove();
   }
 
   $(document).delegate('.bin', 'click', function(){
