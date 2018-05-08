@@ -5,16 +5,15 @@ $(document).ready(function(){
 
   // determine who visited
   function whoVisited(family, friend, stranger, nobody){
-    var result = ""
     var visitor = []
 
     if (family || friend || stranger || nobody){
-      if (family === true){ visitor.push('family') };
-      if (friend === true){ visitor.push('friend') };
-      if (stranger === true){ visitor.push('stranger') };
-      if (nobody === true){ visitor.push('no body') };
+      if (family === true){ visitor.push('Family') };
+      if (friend === true){ visitor.push('Friend') };
+      if (stranger === true){ visitor.push('Stranger') };
+      if (nobody === true){ visitor.push('No Body') };
 
-      return visitor.join(', ')
+      return 'From a ' + visitor.join(', ')
     }
 
     return ''
@@ -24,9 +23,9 @@ $(document).ready(function(){
   var inboxSection = document.getElementById('inbox')
 
   // create card object to appended
-  function cardSection(messageObject){
+  function cardSection(messageId, messageObject){
     inboxSection.innerHTML += [
-      "<div class='card horizontal'>",
+      "<div class='card horizontal' id="+messageId +">",
         "<div class='card-content'>",
           "<p>" + messageObject['message'] +"</p>",
           "<br>",
@@ -38,6 +37,7 @@ $(document).ready(function(){
             messageObject['stranger'],
             messageObject['nobody']
           ) +"</span>",
+          "<span style='color:red;' class='right bin' value = "+ messageId +">x</span>",
         "</div>",
       "</div>"
     ].join('\n')
@@ -48,8 +48,7 @@ $(document).ready(function(){
 
   // detect and sync granular change from message list in firebase
   dbRefMessages.on('child_added', snap => {
-    // console.log(snap.val());
-    cardSection(snap.val())
+    cardSection(snap.key,snap.val())
   });
 
 

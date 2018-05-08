@@ -12,7 +12,7 @@ $(document).ready(function(){
 
   }
   // create firebase reference
-  const dbRefMessages = firebase.database().ref().child('messages')
+  const db = firebase.database()
 
   // form submission
   function buildMessageDbSave(){
@@ -26,15 +26,33 @@ $(document).ready(function(){
     messageObject.stranger  =  document.getElementById('stranger').checked;
     messageObject.nobody  =  document.getElementById('nobody').checked;
 
-    // push messageObject to dbRefMessages
-    dbRefMessages.push(messageObject);
+    return messageObject
   }
+
+  function saveMessagObject() {
+    // push messageObject to dbRefMessages
+    firebase.database().ref('messages/' + Date.now()).push(buildMessageDbSave());
+  }
+
+  $('#thank-you-message').hide();
+  // hide thank you message by default
+  function thankYouFadeOut(){
+    $('#thank-you-message').fadeOut();
+  }
+
+  function thankYouFadeIn(){
+    $('#thank-you-message').fadeIn();
+    window.setTimeout(thankYouFadeOut(), 999999);
+  }
+
+
+
+
 
   var submitButton = document.getElementById("submission");
   submitButton.addEventListener("click", function(){
-    buildMessageDbSave();
-    alert('Thanks for the message!');
-    document.select('#swipe-2')
+    saveMessagObject();
+    // alert('Thanks for the message!');
     clearForm();
   });
 });
