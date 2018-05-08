@@ -1,11 +1,5 @@
 $(document).ready(function(){
 
-  var usersIp;
-
-  $.getJSON("http://jsonip.com/?callback=?", function (data) {
-      usersIp = data.ip
-  });
-
   function clearForm(){
     document.getElementById('stranger').checked = false;
     document.getElementById('nobody').checked = false;
@@ -20,7 +14,6 @@ $(document).ready(function(){
   function buildMessageDbSave(){
 
     var messageObject = new Object();
-    messageObject.userIp  = usersIp;
     messageObject.name    = document.querySelector('#name').value;
     messageObject.contact = document.querySelector('#contact').value;
     messageObject.message = document.querySelector('#message').value;

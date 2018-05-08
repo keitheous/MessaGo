@@ -1,11 +1,5 @@
 $(document).ready(function(){
 
-  var readersIp;
-
-  $.getJSON("http://jsonip.com/?callback=?", function (data) {
-      readersIp = data.ip
-  });
-
   // display stored Messages
   var storedMessages = []
 
@@ -31,7 +25,7 @@ $(document).ready(function(){
   function isReaderTheSender(sendersIpAddress, readersIpAddress){
 
     if (sendersIpAddress === readersIpAddress) {
-      return "<span style='color:red;' class='right bin' id ='"+ sendersIpAddress +"' >x</span>"
+      return
     } else {
       return "<span></span>"
     }
@@ -52,7 +46,7 @@ $(document).ready(function(){
             messageObject['stranger'],
             messageObject['nobody']
           ) +"</em></span>",
-          isReaderTheSender(messageObject['userIp'], readersIp),
+          "<span style='color:red;' class='right bin'>x</span>",
         "</div>",
       "</div>"
     ].join('\n')

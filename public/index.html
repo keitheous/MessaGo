@@ -25,7 +25,7 @@
       <div class="card-tabs">
         <ul class="tabs tabs-fixed-width">
           <li class="tab col s3"><a class="active" href="#swipe-1">Form</a></li>
-          <li class="tab col s3"><a href="#swipe-2">Messages</a></li>
+          <li class="tab col s3"><a href="#swipe-2">Inbox</a></li>
         </ul>
       </div>
 
@@ -35,12 +35,12 @@
           <h3>Form Section</h3>
           <br>
           <div class="row">
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input type="text" id="name">
               <label>Name</label>
             </div>
 
-            <div class="input-field col s6">
+            <div class="input-field col s12 m6">
               <input type="text" id="contact">
               <label>Contact</label>
             </div>
@@ -48,7 +48,7 @@
           </div> <!-- end of first form row -->
 
           <div class="row">
-            <div class="col s3">
+            <div class="col s12 m3">
             <p>
               <label>
                 <input type="checkbox" class="filled-in" id="friend"/>
@@ -57,7 +57,7 @@
             </p>
             </div>
 
-            <div class="col s3">
+            <div class="col s12 m3">
             <p>
               <label>
                 <input type="checkbox" class="filled-in" id="family"/>
@@ -66,7 +66,7 @@
             </p>
             </div>
 
-            <div class="col s3">
+            <div class="col s12 m3">
             <p>
               <label>
                 <input type="checkbox" class="filled-in" id='stranger'/>
@@ -75,7 +75,7 @@
             </p>
             </div>
 
-            <div class="col s3">
+            <div class="col s12 m3">
             <p>
               <label>
                 <input type="checkbox" class="filled-in" id="nobody"/>
@@ -99,12 +99,10 @@
 
       <div id="swipe-2" class="col s12" style="height: 500px; background-color: #E6E6FA; overflow: scroll; padding-bottom: 70px;">
         <div class="container">
-          <div class="row">
-            <div class="col s7"><h3>Inbox Section</h3></div>
-            <div class="col s5"><span id='thank-you-message'>Thanks for the message..</span></div>
-          </div>
-
+          <div class="row"><h3>Inbox Section</h3></div>
+            <span id='thank-you-message'>Thanks for the message..</span>
             <div id="inbox">
+
               <!-- this is where we append messages -->
             </div>
         </div>
