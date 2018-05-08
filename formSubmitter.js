@@ -8,13 +8,9 @@ $(document).ready(function(){
     document.querySelector('#name').value = '';
     document.querySelector('#contact').value = '';
     document.querySelector('#message').value = '';
-    console.log('clear form')
-
   }
-  // create firebase reference
-  const db = firebase.database()
 
-  // form submission
+  // build message Object
   function buildMessageDbSave(){
 
     var messageObject = new Object();
@@ -29,9 +25,12 @@ $(document).ready(function(){
     return messageObject
   }
 
+  // create firebase reference
+  const db = firebase.database()
+
   function saveMessagObject() {
     // push messageObject to dbRefMessages
-    firebase.database().ref('messages/' + Date.now()).push(buildMessageDbSave());
+    db.ref('messages').push(buildMessageDbSave());
   }
 
   $('#thank-you-message').hide();
@@ -46,13 +45,15 @@ $(document).ready(function(){
   }
 
 
-
-
+  function swipe(section){
+    $('ul.tabs').tabs('select_tab', section);
+  }
 
   var submitButton = document.getElementById("submission");
   submitButton.addEventListener("click", function(){
     saveMessagObject();
-    // alert('Thanks for the message!');
+    swipe('swipe-2');
     clearForm();
+    thankYouFadeIn();
   });
 });

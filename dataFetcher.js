@@ -29,27 +29,37 @@ $(document).ready(function(){
         "<div class='card-content'>",
           "<p>" + messageObject['message'] +"</p>",
           "<br>",
-          "<span class='sender'>" + messageObject['name'] +"</span>",
+          "<span class='sender'><strong>" + messageObject['name'] +"</strong></span>",
           "<br>",
-          "<span class='sender'>" + whoVisited(
+          "<span class='sender'><em>" + whoVisited(
             messageObject['family'],
             messageObject['friend'],
             messageObject['stranger'],
             messageObject['nobody']
-          ) +"</span>",
-          "<span style='color:red;' class='right bin' value = "+ messageId +">x</span>",
+          ) +"</em></span>",
+          "<span style='color:red;' class='right bin'>x</span>",
         "</div>",
       "</div>"
     ].join('\n')
   }
 
   // create firebase reference
-  const dbRefMessages = firebase.initializeApp(config).database().ref().child('messages')
+  const db = firebase.initializeApp(config).database()
 
-  // detect and sync granular change from message list in firebase
-  dbRefMessages.on('child_added', snap => {
+
+  // detect and sync granular change from message list in firebase - show
+  db.ref().child('messages').on('child_added', snap => {
     cardSection(snap.key,snap.val())
+      firebase.database().ref('messages')
   });
 
 
+  function removeMessage(id){
+    console.log('removing card with id' + id);
+    db.ref('messages/' + id).remove()
+  }
+
+  $(document).delegate('.bin', 'click', function(){
+    removeMessage($(this).closest('.horizontal').attr('id'))
+  })
 });
