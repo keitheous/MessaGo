@@ -1,47 +1,7 @@
 $(document).ready(function(){
 
-  // TODO :: refactor this to export function from app.js
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBdrbaclbvhHAu_4isVuO81Xr03JIoL5Vw",
-    authDomain: "nothertest-90f29.firebaseapp.com",
-    databaseURL: "https://nothertest-90f29.firebaseio.com",
-    projectId: "nothertest-90f29",
-    storageBucket: "nothertest-90f29.appspot.com",
-    messagingSenderId: "495235487976"
-  };
-  firebase.initializeApp(config);
-
   // display stored Messages
-  var storedMessages = [
-    {
-      'contact': "eee",
-      'family': false,
-      'friend': false,
-      'message': "heheh.",
-      'name': "qweqwe",
-      'nobody': false,
-      'stranger': false
-    },
-    {
-      'contact': "eee",
-      'family': true,
-      'friend': false,
-      'message': "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      'name': "qweqwe",
-      'nobody': false,
-      'stranger': false
-    },
-    {
-      'contact': "1111",
-      'family': true,
-      'friend': true,
-      'message': "22222",
-      'name': "qweqwqweqwee",
-      'nobody': true,
-      'stranger': true
-    }
-  ]
+  var storedMessages = []
 
   // determine who visited
   function whoVisited(family, friend, stranger, nobody){
@@ -55,9 +15,9 @@ $(document).ready(function(){
       if (nobody === true){ visitor.push('no body') };
 
       return visitor.join(', ')
-    } else {
-      return ''
     }
+
+    return ''
   }
 
   // target for appending
@@ -65,12 +25,12 @@ $(document).ready(function(){
 
   // create card object to appended
   function cardSection(messageObject){
-    return [
+    inboxSection.innerHTML += [
       "<div class='card horizontal'>",
         "<div class='card-content'>",
           "<p>" + messageObject['message'] +"</p>",
           "<br>",
-          "<span class='sender'>" + messageObject['contact'] +"</span>",
+          "<span class='sender'>" + messageObject['name'] +"</span>",
           "<br>",
           "<span class='sender'>" + whoVisited(
             messageObject['family'],
@@ -79,14 +39,18 @@ $(document).ready(function(){
             messageObject['nobody']
           ) +"</span>",
         "</div>",
-
       "</div>"
     ].join('\n')
   }
 
-  // message iterator
-  for(var i = 0; i < storedMessages.length; i++){
-    console.log(storedMessages[i]['contact']);
-    inboxSection.innerHTML += cardSection(storedMessages[i]);
-  }
+  // create firebase reference
+  const dbRefMessages = firebase.initializeApp(config).database().ref().child('messages')
+
+  // detect and sync granular change from message list in firebase
+  dbRefMessages.on('child_added', snap => {
+    // console.log(snap.val());
+    cardSection(snap.val())
+  });
+
+
 });

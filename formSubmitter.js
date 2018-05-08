@@ -1,35 +1,40 @@
 $(document).ready(function(){
 
-  // TODO :: refactor this to export function from app.js
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyBdrbaclbvhHAu_4isVuO81Xr03JIoL5Vw",
-    authDomain: "nothertest-90f29.firebaseapp.com",
-    databaseURL: "https://nothertest-90f29.firebaseio.com",
-    projectId: "nothertest-90f29",
-    storageBucket: "nothertest-90f29.appspot.com",
-    messagingSenderId: "495235487976"
-  };
-  firebase.initializeApp(config);
+  var clearForm = function(){
+    document.getElementById('stranger').checked = false;
+    document.getElementById('nobody').checked = false;
+    document.getElementById('family').checked = false;
+    document.getElementById('friend').checked = false;
+    document.querySelector('#name').value = '';
+    document.querySelector('#contact').value = '';
+    document.querySelector('#message').value = '';
+    console.log('clear form')
+
+  }
+  // create firebase reference
+  const dbRefMessages = firebase.database().ref().child('messages')
 
   // form submission
-  function grabValuesBuildMessage(){
-    console.log('grabbing values, building messageObject');
-    var messageObject = {
-      'name':     document.querySelector('#name').value,
-      'contact':  document.querySelector('#contact').value,
-      'message':  document.querySelector('#message').value,
-      'friend':   document.getElementById('friend').checked,
-      'family':   document.getElementById('family').checked,
-      'stranger': document.getElementById('stranger').checked,
-      'nobody':   document.getElementById('nobody').checked
-    }
-    storedMessages.push(messageObject);
-    console.log(storedMessages);
+  function buildMessageDbSave(){
+
+    var messageObject = new Object();
+    messageObject.name    =  document.querySelector('#name').value;
+    messageObject.contact = document.querySelector('#contact').value;
+    messageObject.message = document.querySelector('#message').value;
+    messageObject.friend  =  document.getElementById('friend').checked;
+    messageObject.family  =  document.getElementById('family').checked;
+    messageObject.stranger  =  document.getElementById('stranger').checked;
+    messageObject.nobody  =  document.getElementById('nobody').checked;
+
+    // push messageObject to dbRefMessages
+    dbRefMessages.push(messageObject);
   }
 
   var submitButton = document.getElementById("submission");
   submitButton.addEventListener("click", function(){
-    grabValuesBuildMessage();
+    buildMessageDbSave();
+    alert('Thanks for the message!');
+    document.select('#swipe-2')
+    clearForm();
   });
 });
