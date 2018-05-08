@@ -1,6 +1,12 @@
 $(document).ready(function(){
 
-  var clearForm = function(){
+  var usersIp;
+
+  $.getJSON("http://jsonip.com/?callback=?", function (data) {
+      usersIp = data.ip
+  });
+
+  function clearForm(){
     document.getElementById('stranger').checked = false;
     document.getElementById('nobody').checked = false;
     document.getElementById('family').checked = false;
@@ -14,13 +20,14 @@ $(document).ready(function(){
   function buildMessageDbSave(){
 
     var messageObject = new Object();
-    messageObject.name    =  document.querySelector('#name').value;
+    messageObject.userIp  = usersIp;
+    messageObject.name    = document.querySelector('#name').value;
     messageObject.contact = document.querySelector('#contact').value;
     messageObject.message = document.querySelector('#message').value;
-    messageObject.friend  =  document.getElementById('friend').checked;
-    messageObject.family  =  document.getElementById('family').checked;
-    messageObject.stranger  =  document.getElementById('stranger').checked;
-    messageObject.nobody  =  document.getElementById('nobody').checked;
+    messageObject.friend  = document.getElementById('friend').checked;
+    messageObject.family  = document.getElementById('family').checked;
+    messageObject.stranger= document.getElementById('stranger').checked;
+    messageObject.nobody  = document.getElementById('nobody').checked;
 
     return messageObject
   }

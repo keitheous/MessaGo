@@ -1,5 +1,11 @@
 $(document).ready(function(){
 
+  var readersIp;
+
+  $.getJSON("http://jsonip.com/?callback=?", function (data) {
+      readersIp = data.ip
+  });
+
   // display stored Messages
   var storedMessages = []
 
@@ -22,6 +28,15 @@ $(document).ready(function(){
   // target for appending
   var inboxSection = document.getElementById('inbox')
 
+  function isReaderTheSender(sendersIpAddress, readersIpAddress){
+
+    if (sendersIpAddress === readersIpAddress) {
+      return "<span style='color:red;' class='right bin' id ='"+ sendersIpAddress +"' >x</span>"
+    } else {
+      return "<span></span>"
+    }
+  }
+
   // create card object to appended
   function cardSection(messageId, messageObject){
     inboxSection.innerHTML += [
@@ -37,7 +52,7 @@ $(document).ready(function(){
             messageObject['stranger'],
             messageObject['nobody']
           ) +"</em></span>",
-          "<span style='color:red;' class='right bin'>x</span>",
+          isReaderTheSender(messageObject['userIp'], readersIp),
         "</div>",
       "</div>"
     ].join('\n')
@@ -45,7 +60,6 @@ $(document).ready(function(){
 
   // create firebase reference
   const db = firebase.initializeApp(config).database()
-
 
   // detect and sync granular change from message list in firebase - show
   db.ref().child('messages').on('child_added', snap => {
